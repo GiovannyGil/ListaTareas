@@ -1,0 +1,98 @@
+
+Plan de Proyecto: App de Productividad Personal
+===============================================
+
+📌 Nombre Tentativo
+-------------------
+(A definir. Ejemplos: RITMO, Flowa, MiTiempo, Orbit, Klaro...)
+
+🎯 Propósito General de la App
+------------------------------
+Una app móvil multiplataforma para:
+- Organizar tareas diarias de forma flexible.
+- Mejorar la productividad personal realista, sin presión.
+- Visualizar el progreso con estadísticas y gráficos.
+- Recibir consejos motivacionales y psicológicos adaptados.
+- Apoyar a personas con rutinas distintas: estudiantes, trabajadores, amas de casa, freelancers, etc.
+
+👥 Segmentos de Usuario (NICHOS)
+-------------------------------
+El usuario puede elegir (al registrarse o iniciar):
+- Estudiante
+- Freelancer
+- Trabajador con horario fijo
+- Ama de casa / cuidador
+- Otro (personalizado)
+
+Cada uno puede tener:
+- Mensajes adaptados
+- Ejemplos de tareas frecuentes
+- Sugerencias distintas
+
+🔧 Funcionalidades Clave
+------------------------
+
+✅ Básicas
+- Registro / Inicio de sesión
+- Crear tareas con:
+  - Nombre
+  - Descripción (opcional)
+  - Tiempo estimado
+  - Hora/día
+  - Etiquetas (ej: trabajo, estudio, ocio)
+- Marcar tareas como completadas
+- Medir tiempo real (cronómetro o input manual)
+- Reagendar tareas no terminadas
+- Notificaciones o recordatorios
+
+📊 Productividad y Análisis
+- Comparar tiempo estimado vs real
+- Estadísticas diarias/semanales/mensuales:
+  - Total de tareas
+  - Tiempo invertido
+  - Promedio de cumplimiento
+- Gráficas interactivas y visuales
+- Detectar patrones (ej: más activo en la mañana)
+
+🧘 Motivación y Psicología
+- Mensajes aleatorios motivacionales (tipo 'recuerda que…')
+- Recomendaciones suaves ('no te sobrecargues', 'puedes dividir esta tarea')
+- Logros simbólicos (ej: 7 días seguidos, 90% de cumplimiento)
+- Estadísticas que no presionan, sino que acompañan
+
+🤖 Funciones Avanzadas (IA / futuro)
+- Sugerencias de duración de tareas (según hábitos anteriores)
+- Detección de horas más productivas
+- Generación de mensajes motivacionales vía API (OpenAI u otro)
+- Ayuda para organizar una semana automáticamente
+
+🌐 Multiplataforma y Sincronización
+- Versión web sincronizada (futuro)
+- Sincronización en la nube
+- Exportar/respaldar progreso
+
+🧱 Cosas que NO se desean (por ahora)
+------------------------------------
+- Publicidad invasiva
+- Muro de pago o limitaciones agresivas
+- Enfoque corporativo o empresarial
+- Gamificación tipo juego (nivel, monedas, etc.)
+- Incluir redes sociales o comunidad (al menos al principio)
+
+🎨 Enfoque de Diseño (UI/UX)
+----------------------------
+- Cálido, amigable, emocional (sin parecer “app de trabajo” rígida)
+- Colores suaves, íconos motivadores
+- Espacio visual libre (no sobrecargado)
+- Experiencia ligera pero potente
+- Inspiración: Notion, Headspace, Forest, Duolingo (estética emocional)
+
+📦 Posibles Etapas del Desarrollo (Roadmap)
+-------------------------------------------
+1. Planeación (lo que estás haciendo ahora)
+2. Diseño de experiencia (UX/UI wireframes)
+3. Desarrollo del MVP básico
+4. Feedback real de usuarios
+5. Iteración + mejoras
+6. Publicación en Play Store
+7. Web o sincronización cross-platform

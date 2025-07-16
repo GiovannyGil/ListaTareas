@@ -1,0 +1,3 @@
+Apartado FrontEnd
+
+se realizara con React, usando vite, mse va a separar todo por componentes

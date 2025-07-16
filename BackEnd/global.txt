@@ -1,0 +1,7 @@
+Apartado BackEnd
+
+se realizará con NestJS, conectado a sqlite3
+se usara typeORM
+se mandará todo por Cookie HttpOnly
+se usara encript
+se usara jwt
