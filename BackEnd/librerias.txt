@@ -1,0 +1,10 @@
+npm install 
+
+- @nestjs/typeorm typeorm 
+- sqlite3
+- @nestjs/graphql graphql
+- bcrypt
+- --save-dev @types/bcrypt
+- @nestjs/schedule
+- class-validator
+- 
