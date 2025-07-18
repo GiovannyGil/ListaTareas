@@ -7,4 +7,8 @@ npm install
 - --save-dev @types/bcrypt
 - @nestjs/schedule
 - class-validator
+- @nestjs/jwt 
+- jsonwebtoken
+- @nestjs/passport 
+- passport
 - 

@@ -4,9 +4,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Role } from 'src/roles/entities/role.entity';
 import { RolesService } from 'src/roles/roles.service';
-import { CreateUsuarioDto } from 'src/usuarios/dto/create-usuario.dto';
-import { Usuario } from 'src/usuarios/entities/usuario.entity';
-import { UsuariosService } from 'src/usuarios/usuarios.service';
+import { CreateUsuarioInput } from 'src/usuario/dto/create-usuario.input';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
+import { UsuarioService } from 'src/usuario/usuario.service';
 import { Repository } from 'typeorm';
 
 
@@ -15,7 +15,7 @@ export class AuthService {
     private invalidatedTokens: Set<string> = new Set(); // Lista negra de tokens
 
     constructor(
-        private readonly usuariosService: UsuariosService,
+        private readonly usuariosService: UsuarioService,
         private readonly roleService: RolesService,
         @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>,
         private readonly jwtService: JwtService,
@@ -62,7 +62,7 @@ export class AuthService {
     }
 
     // Método para registrarse como nuevo usuario
-    async register(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
+    async register(createUsuarioDto: CreateUsuarioInput): Promise<Usuario> {
         try {
             // obtener los datos del usuario -> payload
             const { rolId, clave, ...usuarioData } = createUsuarioDto

@@ -4,15 +4,15 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Usuario } from 'src/usuarios/entities/usuario.entity';
-import { UsuariosModule } from 'src/usuarios/usuarios.module';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
+import { UsuarioModule } from 'src/usuario/usuario.module';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { RolesModule } from 'src/roles/roles.module';
 
 @Module({
   imports: [
     // TypeOrmModule.forFeature([Usuario]),
-    UsuariosModule,
+    UsuarioModule,
     RolesModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({

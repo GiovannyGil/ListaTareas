@@ -36,6 +36,10 @@ export class Usuario {
   @Column({ name:'clave', type: 'varchar', length: 100, nullable: false })
   clave: string;
 
+  @Field()
+  @Column({ name:'genero', type: 'varchar', length: 1, nullable: false })
+  genero: string;
+
   @Field({ defaultValue: true })
   @Column({ name:'estado', default: true })
   estado: boolean;

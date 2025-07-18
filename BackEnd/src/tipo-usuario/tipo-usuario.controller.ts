@@ -8,27 +8,37 @@ export class TipoUsuarioController {
   constructor(private readonly tipoUsuarioService: TipoUsuarioService) {}
 
   @Post()
-  create(@Body() createTipoUsuarioDto: CreateTipoUsuarioDto) {
-    return this.tipoUsuarioService.create(createTipoUsuarioDto);
+  crearTipoUsuario(@Body() createTipoUsuarioDto: CreateTipoUsuarioDto) {
+    return this.tipoUsuarioService.crearTipoUsuario(createTipoUsuarioDto);
   }
 
   @Get()
-  findAll() {
-    return this.tipoUsuarioService.findAll();
+  BuscarTipoUsuarios() {
+    return this.tipoUsuarioService.BuscarTipoUsuarios();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tipoUsuarioService.findOne(+id);
+  BuscarTipoUsuarioxID(@Param('id') id: string) {
+    return this.tipoUsuarioService.BuscarTipoUsuarioxID(+id);
+  }
+
+  @Get('nombre/:nombre')
+  BuscarTipoUsuarioxNombre(@Param('nombre') nombre: string) {
+    return this.tipoUsuarioService.BuscarTipoUsuarioxNombre(nombre);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTipoUsuarioDto: UpdateTipoUsuarioDto) {
-    return this.tipoUsuarioService.update(+id, updateTipoUsuarioDto);
+  ActualizarTipoUsuario(@Param('id') id: string, @Body() updateTipoUsuarioDto: UpdateTipoUsuarioDto) {
+    return this.tipoUsuarioService.ActualizarTipoUsuario(+id, updateTipoUsuarioDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tipoUsuarioService.remove(+id);
+  EliminarTipoUsuarioPermanente(@Param('id') id: string) {
+    return this.tipoUsuarioService.EliminarTipoUsuarioPermanente(+id);
+  }
+
+  @Delete(':id')
+  EliminarTipoUsuarioSoftDelete(@Param('id') id: string) {
+    return this.tipoUsuarioService.EliminarTipoUsuarioSoftDelete(+id);
   }
 }
