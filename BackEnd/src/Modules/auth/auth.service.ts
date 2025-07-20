@@ -2,11 +2,11 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { Role } from 'src/roles/entities/role.entity';
-import { RolesService } from 'src/roles/roles.service';
-import { CreateUsuarioInput } from 'src/usuario/dto/create-usuario.input';
-import { Usuario } from 'src/usuario/entities/usuario.entity';
-import { UsuarioService } from 'src/usuario/usuario.service';
+import { Role } from '@/Modules/roles/entities/role.entity';
+import { RolesService } from '@/Modules/roles/roles.service';
+import { CreateUsuarioInput } from '@/Modules/usuario/dto/create-usuario.input';
+import { Usuario } from '@/Modules/usuario/entities/usuario.entity';
+import { UsuarioService } from '@/Modules/usuario/usuario.service';
 import { Repository } from 'typeorm';
 
 
@@ -75,7 +75,7 @@ export class AuthService {
 
             // verificar que no esten vacios
             if (usuarioData === null || !usuarioData) { throw new NotFoundException(`algo sucedio, no se encontraron los datos del usuario`) }
-            
+
             // Verificar si el correo ya existe
             const existingEmail = await this.usuariosService.findOneByCorreo(usuarioData.correo);
             if (existingEmail) {
@@ -129,7 +129,7 @@ export class AuthService {
             // Enviar correo con el token (implementa tu lógica de envío de correo aquí)
             // await this.sendResetPasswordEmail(usuario.correo);
 
-            return { 
+            return {
                 message: 'Se ha encontrado un usuario que coincide con su correo',
                 usuario: usuario.nombreUsuario
             };
@@ -184,7 +184,7 @@ export class AuthService {
             // if(!claveValida) {
             //     throw new UnauthorizedException('La clave no cumple con los requisitos de seguridad');
             // }
-            
+
             // actualizar la nueva clave el usuario
             const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
             if (!usuario) {

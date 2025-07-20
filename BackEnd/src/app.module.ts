@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { TipoUsuarioModule } from './tipo-usuario/tipo-usuario.module';
-import { UsuarioModule } from './usuario/usuario.module';
-import { TareasModule } from './tareas/tareas.module';
-import { RolesModule } from './roles/roles.module';
+import { AuthModule } from './Modules/auth/auth.module';
+import { TipoUsuarioModule } from './Modules/tipo-usuario/tipo-usuario.module';
+import { UsuarioModule } from './Modules/usuario/usuario.module';
+import { TareasModule } from './Modules/tareas/tareas.module';
+import { RolesModule } from './Modules/roles/roles.module';
 import ConnexionDDBB from './database/conexion';
 import { ScheduleModule } from '@nestjs/schedule';
 
@@ -19,4 +19,4 @@ import { ScheduleModule } from '@nestjs/schedule';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,4 +1,4 @@
-import { TipoUsuario } from 'src/tipo-usuario/entities/tipo-usuario.entity';
+import { TipoUsuario } from '@/Modules/tipo-usuario/entities/tipo-usuario.entity';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateTipoUsuarioDto } from './dto/create-tipo-usuario.dto';
 import { UpdateTipoUsuarioDto } from './dto/update-tipo-usuario.dto';
@@ -11,20 +11,20 @@ export class TipoUsuarioService {
 
   constructor(
     @InjectRepository(TipoUsuario) private tipoUsuRespositorio: Repository<TipoUsuario>
-  ) {}
+  ) { }
 
   // metodo para verificar si el tipo-usuario existe
   async verificarExistencia(nombre: string): Promise<Boolean> {
-      try {
-        // buscar el tipo-usuario
-        return !!(await this.tipoUsuRespositorio.findOne({ where: { nombre, deletedAt: IsNull() } }));
-      } catch (error) {
-        console.log('Error al verificar la existencia del Tipo-Usuario', error);
-        throw new InternalServerErrorException(`Error al verificar la existencia del Tipo-Usuario: ${error.message}`);
-      }
+    try {
+      // buscar el tipo-usuario
+      return !!(await this.tipoUsuRespositorio.findOne({ where: { nombre, deletedAt: IsNull() } }));
+    } catch (error) {
+      console.log('Error al verificar la existencia del Tipo-Usuario', error);
+      throw new InternalServerErrorException(`Error al verificar la existencia del Tipo-Usuario: ${error.message}`);
     }
+  }
 
-  async crearTipoUsuario(createTipoUsuarioDto: CreateTipoUsuarioDto): Promise<  TipoUsuario> {
+  async crearTipoUsuario(createTipoUsuarioDto: CreateTipoUsuarioDto): Promise<TipoUsuario> {
     try {
       const { nombre, descripcion, estado } = createTipoUsuarioDto;
 
@@ -124,7 +124,7 @@ export class TipoUsuarioService {
       if (!tipoUsuario) throw new InternalServerErrorException('Tipo de usuario no encontrado');
 
       // eliminar el tipo de usuario -> asignar la fecha de eliminación
-      tipoUsuario.deletedAt = new Date(); 
+      tipoUsuario.deletedAt = new Date();
       await this.tipoUsuRespositorio.softDelete(id);
       return { message: 'Tipo de usuario eliminado correctamente' };
     } catch (error) {
@@ -149,24 +149,24 @@ export class TipoUsuarioService {
 
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT) // Tarea programada diariamente a la medianoche
-    async cleanDeletedRecords() {
-      try {
-        const thresholdDate = new Date();
-        thresholdDate.setDate(thresholdDate.getDate() - 30); // Fecha límite (30 días atrás)
-  
-        const roleParaEliminar = await this.tipoUsuRespositorio.find({
-          where: {
-            deletedAt: In([LessThan(thresholdDate)]), // role con deletedAt anterior al límite
-          },
-        });
-  
-        if (roleParaEliminar.length > 0) {
-          await this.tipoUsuRespositorio.remove(roleParaEliminar); // Eliminación definitiva
-          console.log(`Eliminados ${roleParaEliminar.length} tipoUsuarios obsoletos.`);
-        }
-      } catch (error) {
-        console.error('Error al limpiar registros eliminados:', error);
-        throw new InternalServerErrorException(`Error al limpiar registros eliminados: ${error.message}`);
+  async cleanDeletedRecords() {
+    try {
+      const thresholdDate = new Date();
+      thresholdDate.setDate(thresholdDate.getDate() - 30); // Fecha límite (30 días atrás)
+
+      const roleParaEliminar = await this.tipoUsuRespositorio.find({
+        where: {
+          deletedAt: In([LessThan(thresholdDate)]), // role con deletedAt anterior al límite
+        },
+      });
+
+      if (roleParaEliminar.length > 0) {
+        await this.tipoUsuRespositorio.remove(roleParaEliminar); // Eliminación definitiva
+        console.log(`Eliminados ${roleParaEliminar.length} tipoUsuarios obsoletos.`);
       }
+    } catch (error) {
+      console.error('Error al limpiar registros eliminados:', error);
+      throw new InternalServerErrorException(`Error al limpiar registros eliminados: ${error.message}`);
     }
+  }
 }

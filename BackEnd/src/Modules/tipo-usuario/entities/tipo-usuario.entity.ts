@@ -1,4 +1,4 @@
-import { Usuario } from 'src/usuario/entities/usuario.entity';
+import { Usuario } from '@/Modules/usuario/entities/usuario.entity';
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'TipoUsuarios' }) // TypeORM
