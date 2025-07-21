@@ -3,6 +3,7 @@ import { TipoUsuario } from '@/Modules/tipo-usuario/entities/tipo-usuario.entity
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Role } from '@/Modules/roles/entities/role.entity';
+import { Tarea } from '@/Modules/tareas/entities/tarea.entity';
 
 
 @ObjectType() //GraphQL
@@ -21,7 +22,7 @@ export class Usuario {
     apellidos: string;
 
     @Field()
-    @Column({ name: 'nombreUsuario', type: 'varchar', length: 20, nullable: false })
+    @Column({ name: 'nombreUsuario', type: 'varchar', length: 20, nullable: false, unique: true })
     nombreUsuario: string
 
     @Field()
@@ -68,6 +69,10 @@ export class Usuario {
     @ManyToOne(() => Role, (role) => role.usuarios) // Relacion N:1 con Role
     @JoinColumn({ name: "rolId" }) // tabla intermedia (detalles) > se pone en la tabla que tiene la llave foranea
     rol: Role
+
+    // todo: con tareas -> un usuario puede tener muchas tareas, una tarea solo puede tener un usuario
+    @OneToMany(() => Tarea, (tarea) => tarea.usuario)
+    tareas: Tarea[];
 
     @BeforeInsert()
     setCreatedAt() {

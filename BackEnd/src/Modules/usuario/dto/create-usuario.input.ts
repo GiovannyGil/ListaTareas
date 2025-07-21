@@ -3,9 +3,6 @@ import { IsInt, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator
 
 @InputType()
 export class CreateUsuarioInput {
-  // @Field(() => Int, { description: 'Example field (placeholder)' })
-  // exampleField: number;
-
   @IsString({ message: 'el campo debe ser un string' })
   @IsNotEmpty({ message: 'el campo no puede estar vacio' })
   @Length(1, 50, { message: 'el tamaño es de maximo 20 carácteres' })

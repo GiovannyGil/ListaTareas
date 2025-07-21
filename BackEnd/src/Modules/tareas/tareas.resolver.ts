@@ -9,27 +9,38 @@ export class TareasResolver {
   constructor(private readonly tareasService: TareasService) {}
 
   @Mutation(() => Tarea)
-  createTarea(@Args('createTareaInput') createTareaInput: CreateTareaInput) {
-    return this.tareasService.create(createTareaInput);
+  crearTarea(@Args('createTareaInput') createTareaInput: CreateTareaInput) {
+    return this.tareasService.crearTarea(createTareaInput);
   }
 
   @Query(() => [Tarea], { name: 'tareas' })
-  findAll() {
-    return this.tareasService.findAll();
+  buscarTareas() {
+    return this.tareasService.buscarTareas();
   }
 
   @Query(() => Tarea, { name: 'tarea' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.tareasService.findOne(id);
+  buscarTareaxID(@Args('id', { type: () => Int }) id: number) {
+    return this.tareasService.buscarTareaxID(id);
+  }
+
+  @Query(() => [Tarea], { name: 'tareasPorUsuario' })
+  buscarTareasPorUsuario(@Args('usuarioId', { type: () => Int })
+  usuarioId: number) {
+    return this.tareasService.buscarTareasPorUsuario(usuarioId);
   }
 
   @Mutation(() => Tarea)
-  updateTarea(@Args('updateTareaInput') updateTareaInput: UpdateTareaInput) {
-    return this.tareasService.update(updateTareaInput.id, updateTareaInput);
+  actualizarTarea(@Args('updateTareaInput') updateTareaInput: UpdateTareaInput) {
+    return this.tareasService.actualizarTarea(updateTareaInput.id, updateTareaInput);
   }
 
   @Mutation(() => Tarea)
-  removeTarea(@Args('id', { type: () => Int }) id: number) {
-    return this.tareasService.remove(id);
+  eliminarTareaPermanente(@Args('id', { type: () => Int }) id: number) {
+    return this.tareasService.eliminarTareaPermanente(id);
+  }
+
+  @Mutation(() => Tarea)
+  eliminarTareaSoftDelete(@Args('id', { type: () => Int }) id: number) {
+    return this.tareasService.eliminarTareaSoftDelete(id);
   }
 }
