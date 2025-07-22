@@ -7,7 +7,7 @@ import { RolesService } from '@/Modules/roles/roles.service';
 import { CreateUsuarioInput } from '@/Modules/usuario/dto/create-usuario.input';
 import { Usuario } from '@/Modules/usuario/entities/usuario.entity';
 import { UsuarioService } from '@/Modules/usuario/usuario.service';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 
 
 @Injectable()
@@ -25,7 +25,7 @@ export class AuthService {
     async login(nombreUsuario: string, clave: string): Promise<{ token: string }> {
         try {
             // Buscar usuario
-            const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+            const usuario = await this.usuariosService.buscarUsuarioxNombreUsuario(nombreUsuario);
             if (!usuario) {
                 console.log(`Usuario ${nombreUsuario} no encontrado`);
                 throw new NotFoundException(`El usuario con NombreUsuario "${nombreUsuario}" no existe o ya fue eliminado.`);
@@ -77,19 +77,19 @@ export class AuthService {
             if (usuarioData === null || !usuarioData) { throw new NotFoundException(`algo sucedio, no se encontraron los datos del usuario`) }
 
             // Verificar si el correo ya existe
-            const existingEmail = await this.usuariosService.findOneByCorreo(usuarioData.correo);
+            const existingEmail = await this.usuariosService.buscarUsuarioxCorreo(usuarioData.correo);
             if (existingEmail) {
                 throw new UnauthorizedException('El correo ya está registrado');
             }
 
             // Verificar si el nombre de usuario ya existe
-            const existingUsername = await this.usuariosService.findOneByNombreUsuario(usuarioData.nombreUsuario);
+            const existingUsername = await this.usuariosService.buscarUsuarioxNombreUsuario(usuarioData.nombreUsuario);
             if (existingUsername) {
                 throw new UnauthorizedException('El nombre de usuario ya está registrado');
             }
 
             // Verificar si el celular ya existe
-            const existingCellphone = await this.usuarioRepository.findOne({ where: { celular: usuarioData.celular, deletedAt: null } });
+            const existingCellphone = await this.usuarioRepository.findOne({ where: { celular: usuarioData.celular, deletedAt: IsNull() } });
             if (existingCellphone) {
                 throw new UnauthorizedException('El celular ya está registrado');
             }
@@ -121,7 +121,7 @@ export class AuthService {
     async recordarUsuario(correo: string): Promise<any> {
         try {
             // Verificar si el correo existe
-            const usuario = await this.usuariosService.findOneByCorreo(correo);
+            const usuario = await this.usuariosService.buscarUsuarioxCorreo(correo);
             if (!usuario) {
                 throw new NotFoundException(`El correo "${correo}" no está registrado.`);
             }
@@ -143,10 +143,10 @@ export class AuthService {
     async buscarCoincidencias(nombreUsuario: string, correo: string): Promise<boolean> {
         try {
             // verificar si el usuario existe
-            const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+            const usuario = await this.usuariosService.buscarUsuarioxNombreUsuario(nombreUsuario);
 
             // verificar si el correo existe
-            const usuarioCorreo = await this.usuariosService.findOneByCorreo(correo);
+            const usuarioCorreo = await this.usuariosService.buscarUsuarioxCorreo(correo);
 
             // verificar si el usuario y correo son del mismo usuario
             if (usuarioCorreo && usuarioCorreo.nombreUsuario !== nombreUsuario) {
@@ -186,7 +186,7 @@ export class AuthService {
             // }
 
             // actualizar la nueva clave el usuario
-            const usuario = await this.usuariosService.findOneByNombreUsuario(nombreUsuario);
+            const usuario = await this.usuariosService.buscarUsuarioxNombreUsuario(nombreUsuario);
             if (!usuario) {
                 throw new NotFoundException(`El usuario "${nombreUsuario}" no existe.`);
             }

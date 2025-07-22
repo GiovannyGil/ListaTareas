@@ -3,10 +3,13 @@ import { TareasService } from './tareas.service';
 import { Tarea } from './entities/tarea.entity';
 import { CreateTareaInput } from './dto/create-tarea.input';
 import { UpdateTareaInput } from './dto/update-tarea.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../auth/jwt/GqlAuthGuard.guard';
 
 @Resolver(() => Tarea)
+@UseGuards(GqlAuthGuard) // <-- Protege todos los métodos del resolver
 export class TareasResolver {
-  constructor(private readonly tareasService: TareasService) {}
+  constructor(private readonly tareasService: TareasService) { }
 
   @Mutation(() => Tarea)
   crearTarea(@Args('createTareaInput') createTareaInput: CreateTareaInput) {
@@ -24,8 +27,7 @@ export class TareasResolver {
   }
 
   @Query(() => [Tarea], { name: 'tareasPorUsuario' })
-  buscarTareasPorUsuario(@Args('usuarioId', { type: () => Int })
-  usuarioId: number) {
+  buscarTareasPorUsuario(@Args('usuarioId', { type: () => Int }) usuarioId: number) {
     return this.tareasService.buscarTareasPorUsuario(usuarioId);
   }
 

@@ -70,6 +70,14 @@ export class Usuario {
     @JoinColumn({ name: "rolId" }) // tabla intermedia (detalles) > se pone en la tabla que tiene la llave foranea
     rol: Role
 
+    @Field(() => Int)
+    @Column()
+    tipoUsuarioId: number;
+
+    @Field(() => Int)
+    @Column()
+    rolId: number;
+
     // todo: con tareas -> un usuario puede tener muchas tareas, una tarea solo puede tener un usuario
     @OneToMany(() => Tarea, (tarea) => tarea.usuario)
     tareas: Tarea[];

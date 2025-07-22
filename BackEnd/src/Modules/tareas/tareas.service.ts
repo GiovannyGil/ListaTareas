@@ -16,7 +16,7 @@ export class TareasService {
     @InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>,
   ) {}
 
-  async crearTarea(createTareaInput: CreateTareaInput) {
+  async crearTarea(createTareaInput: CreateTareaInput): Promise<{ message: string | Tarea }> {
     try {
       const { usuarioId, ...tareaData } = createTareaInput;
 
@@ -28,7 +28,8 @@ export class TareasService {
 
       const nuevaTarea = this.tareaRepository.create({ ...tareaData, usuario });
 
-      return await this.tareaRepository.save(nuevaTarea);
+      await this.tareaRepository.save(nuevaTarea);
+      return { message: 'Tarea creada correctamente' };
     } catch (error) {
       console.error('Error al crear la tarea:', error);
       throw new InternalServerErrorException(`Error al crear la tarea: ${error.message}`);
@@ -80,7 +81,7 @@ export class TareasService {
     }
   }
 
-  async actualizarTarea(id: number, updateTareaInput: UpdateTareaInput) {
+  async actualizarTarea(id: number, updateTareaInput: UpdateTareaInput): Promise<{ message: string | Tarea }> {
     try {
       const { usuarioId, ...tareaData } = updateTareaInput;
       const tarea = await this.tareaRepository.findOne({ where: { id, deletedAt: IsNull() } });
@@ -96,7 +97,8 @@ export class TareasService {
       // actualizar los campos de la tarea
       Object.assign(tarea, tareaData);
       // guardar los cambios
-      return await this.tareaRepository.save(tarea);
+      await this.tareaRepository.save(tarea);
+      return { message: 'Tarea actualizada correctamente' }; 
     } catch (error) {
       console.error('Error al actualizar la tarea:', error);
       throw new InternalServerErrorException(`Error al actualizar la tarea con ID ${id}: ${error.message}`);

@@ -7,7 +7,7 @@ import { Usuario } from '../usuario/entities/usuario.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Tarea, Usuario])],
-  controllers: [TareasResolver],
+  controllers: [],
   providers: [TareasResolver, TareasService],
   exports: [TareasService],
 })

@@ -117,12 +117,16 @@ export class UsuarioService {
         relations: ['rol'],
       });
 
-      if (!usuario) throw new NotFoundException(`Usuario con ID ${id} no encontrado.`);
+      if (!usuario) {
+        throw new NotFoundException(`Usuario con ID ${id} no encontrado.`);
+      }
 
       // Si viene un rol nuevo, validarlo y asignarlo
       if (rolId !== undefined && rolId !== null) {
         const rol = await this.roleRepository.findOne({ where: { id: rolId, deletedAt: IsNull() } });
-        if (!rol) throw new NotFoundException(`Rol con ID ${rolId} no encontrado.`);
+        if (!rol) {
+          throw new NotFoundException(`Rol con ID ${rolId} no encontrado.`);
+        }
         usuario.rol = rol;
       }
 

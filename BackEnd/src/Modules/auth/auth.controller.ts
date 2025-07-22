@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UnauthorizedException, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Request } from 'express';
-import { CreateUsuarioDto } from 'src/usuarios/dto/create-usuario.dto';
+import { CreateUsuarioInput } from '@/Modules/usuario/dto/create-usuario.input';
 
 @Controller('auth')
 export class AuthController {
@@ -13,7 +13,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() createUsuarioDto: CreateUsuarioDto) {
+  async register(@Body() createUsuarioDto: CreateUsuarioInput) {
     return this.authService.register(createUsuarioDto);
   }
 

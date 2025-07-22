@@ -1,8 +1,9 @@
 import { Usuario } from '@/Modules/usuario/entities/usuario.entity';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { BeforeInsert, BeforeUpdate, Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
+@Entity({ name: 'Tareas' })
 export class Tarea {
   @Field(() => Int, { description: 'Identificador unico autoincrementable' })
   @PrimaryGeneratedColumn()

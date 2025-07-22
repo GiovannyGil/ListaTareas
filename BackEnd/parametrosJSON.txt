@@ -1,0 +1,82 @@
+rol:
+ {
+   "nombreRol": "Admin",
+   "descripcion": "Rol de administrador",
+   "estado": 1
+ }
+
+tipoUsuario:
+ {
+   "nombre": "Admin",
+   "descripcion": "Rol de administrador",
+   "estado": true
+ }
+
+Usuario:  -> GraphQL (GraphQL usa el metodo POST para todos los llamados http)
+post ->
+mutation {
+  crearUsuario(
+    createUsuarioInput: {
+      nombres: "Arbey Giovanny"
+      apellidos: "Chica Gil"
+      nombreUsuario: "GioGil"
+      correo: "arbey@email.com"
+      celular: "3043209834"
+      clave: "123456"
+      genero: "M"
+      estado: true
+      tipoUsuarioId: 1
+      rolId: 1
+    }
+  ) {
+    id
+    nombreUsuario
+    correo
+  }
+}
+
+"get"
+query {
+  usuarios {
+    id
+    nombres
+    apellidos
+    nombreUsuario
+    correo
+  }
+}
+
+query {
+  usuario(id: 1) {
+    id
+    nombres
+    apellidos
+    nombreUsuario
+    correo
+  }
+}
+
+"actualizar"
+mutation {
+  actualizarUsuario(
+    id: 1
+    updateUsuarioInput: {
+      nombres: "Arbey Giovanny Actualizado"
+      celular: "3123456789"
+    }
+  ) {
+    id
+    nombreUsuario
+    correo
+    celular
+  }
+}
+
+"eliminar":
+mutation {
+  eliminarUsuario(id: 1) {
+    id
+    nombreUsuario
+  }
+}
+
