@@ -13,3 +13,5 @@ npm install
 - passport
 - passport-jwt
 - --save-dev @types/passport-jwt
+- cookie-parser
+- -D @types/cookie-parser
