@@ -1,44 +1,38 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { useState } from 'react';
+import { Platform, SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {  
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+  const [titleText, setTitleText] = useState("Bird's Nest");
+  const bodyText = 'This is not really a bird nest.';
+
+  const onPressTitle = () => {
+    setTitleText("Bird's Nest [pressed]");
+  };
+ return (
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <Text style={[styles.baseText, styles.titleText]} onPress={onPressTitle}> Iniciar sesión </Text>
+        <Text style={styles.baseText}>{bodyText}</Text>
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+          style={{ width: 50, height: 50 }}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Iniciar Sesión!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-     </ParallaxScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  baseText: {
+    fontFamily: 'Cochin',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });

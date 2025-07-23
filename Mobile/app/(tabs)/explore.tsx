@@ -1,41 +1,38 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-
+import { useState } from 'react';
+import { Text, StyleSheet } from 'react-native';
+import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 export default function TabTwoScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+  const [titleText, setTitleText] = useState("Bird's Nest");
+  const bodyText = 'This is not really a bird nest.';
+
+  const onPressTitle = () => {
+    setTitleText("Bird's Nest [pressed]");
+  };
+ return (
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <Text style={[styles.baseText, styles.titleText]} onPress={onPressTitle}> Registrarse </Text>
+        <Text style={styles.baseText}>{bodyText}</Text>
+        <Image
+          source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+          style={{ width: 50, height: 50 }}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Registrarse</ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  baseText: {
+    fontFamily: 'Cochin',
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
+
