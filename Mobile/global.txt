@@ -1,4 +1,0 @@
-Apartado Movil
-
-se hara con React Native
-se separará todo por componentes
