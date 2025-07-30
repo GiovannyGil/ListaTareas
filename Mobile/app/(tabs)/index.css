@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    flex: 1;
+    width: 90%;
+    height: auto;
+    margin: 5% auto;
+
+}
+
+.baseText{
+    font-family: 'Cochin', sans-serif;
+    width: auto;
+    height: auto;
+    margin: 10px 0;
+    text-align: center;
+    color: #333;
+}
+
+.titleText {
+    font-size: 20px;
+    font-weight: bold;
+}

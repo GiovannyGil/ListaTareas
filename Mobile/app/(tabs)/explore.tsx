@@ -2,6 +2,9 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+
+import './explore.css'
+
 export default function TabTwoScreen() {
   const [titleText, setTitleText] = useState("Bird's Nest");
   const bodyText = 'This is not really a bird nest.';
@@ -11,9 +14,9 @@ export default function TabTwoScreen() {
   };
  return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Text style={[styles.baseText, styles.titleText]} onPress={onPressTitle}> Registrarse </Text>
-        <Text style={styles.baseText}>{bodyText}</Text>
+      <SafeAreaView className='container'>
+        <Text className='baseText titleText' onPress={onPressTitle}> Registrarse </Text>
+        <Text className='baseText'>{bodyText}</Text>
         <Image
           source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
           style={{ width: 50, height: 50 }}
@@ -23,16 +26,5 @@ export default function TabTwoScreen() {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  baseText: {
-    fontFamily: 'Cochin',
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
+const styles = StyleSheet.create({});
 
