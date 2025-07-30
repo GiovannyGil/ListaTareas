@@ -2,10 +2,8 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Platform, SafeAreaView, StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 export default function HomeScreen() {  
   const [titleText, setTitleText] = useState("Bird's Nest");
-  const bodyText = 'This is not really a bird nest.';
 
   const onPressTitle = () => {
     setTitleText("Bird's Nest [pressed]");
@@ -13,12 +11,11 @@ export default function HomeScreen() {
  return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={[styles.baseText, styles.titleText]} onPress={onPressTitle}> Iniciar sesión </Text>
-        <Text style={styles.baseText}>{bodyText}</Text>
-        <Image
+        <Image className='logo'
           source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
           style={{ width: 50, height: 50 }}
         />
+        <Text style={[styles.baseText, styles.titleText]} onPress={onPressTitle}> Iniciar sesión </Text>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -27,12 +24,22 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: '5%',
+    //justifyContent: 'center',
+    alignItems: 'center',
   },
   baseText: {
     fontFamily: 'Cochin',
+    fontSize: 18,
+    color: 'white',
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
+    color: 'white',
   },
+  logo : {
+    width: 50,
+    height: 50,
+  }
 });
