@@ -19,10 +19,12 @@ export default function HomeScreen() {
         > 
           Iniciar sesión 
         </Text>
-        
+      
+
       </SafeAreaView>
     </SafeAreaProvider>
   );
 };
 
 const styles = StyleSheet.create({});
+
