@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
-import './explore.css'
-
 export default function TabTwoScreen() {
   const [titleText, setTitleText] = useState("Bird's Nest");
   const bodyText = 'This is not really a bird nest.';
