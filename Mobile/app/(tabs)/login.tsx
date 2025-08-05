@@ -12,8 +12,6 @@ import {
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import './index.css'
-
 export default function HomeScreen() {  
   // Estados para manejar los valores de los campos del formulario
   const [nombreUsuario, setNombreUsuario] = useState('');
