@@ -41,7 +41,7 @@ export class TareasResolver {
     return this.tareasService.eliminarTareaPermanente(id);
   }
 
-  @Mutation(() => Tarea)
+  @Mutation(() => Tarea, {name: 'soft'})
   eliminarTareaSoftDelete(@Args('id', { type: () => Int }) id: number) {
     return this.tareasService.eliminarTareaSoftDelete(id);
   }

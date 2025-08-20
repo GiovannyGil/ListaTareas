@@ -37,7 +37,7 @@ export class TipoUsuarioController {
     return this.tipoUsuarioService.EliminarTipoUsuarioPermanente(+id);
   }
 
-  @Delete(':id')
+  @Delete('soft/:id')
   EliminarTipoUsuarioSoftDelete(@Param('id') id: string) {
     return this.tipoUsuarioService.EliminarTipoUsuarioSoftDelete(+id);
   }

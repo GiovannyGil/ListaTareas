@@ -19,7 +19,7 @@ export class RolesController {
     return await this.rolesService.findAll();
   }
 
-  @Get('id/:id')
+  @Get(':id')
   async findOneByID(@Param('id') id: string) {
     return await this.rolesService.findOneByID(+id);
   }
@@ -29,12 +29,12 @@ export class RolesController {
     return await this.rolesService.findOneByNombre(nombreRol);
   }
 
-  @Patch('update/:id')
+  @Patch(':id')
   async update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
     return await this.rolesService.update(+id, updateRoleDto);
   }
 
-  @Delete('delete/:id')
+  @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.rolesService.softDelete(id);
   }

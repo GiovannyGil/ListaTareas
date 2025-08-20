@@ -38,7 +38,7 @@ export class UsuarioResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation(() => Boolean)
+  @Mutation(() => Usuario, {name: 'soft'})
   async eliminarUsuarioSoftDelete(@Args('id', { type: () => Int }) id: number) {
     await this.usuarioService.EliminarUsuarioSoftDelete(id);
     return true;

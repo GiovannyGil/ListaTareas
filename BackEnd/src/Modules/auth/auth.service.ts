@@ -180,10 +180,10 @@ export class AuthService {
             }
 
             // verificar si la clave cumple con los requisitos
-            // const claveValida =  this.validarClave(clave);
-            // if(!claveValida) {
-            //     throw new UnauthorizedException('La clave no cumple con los requisitos de seguridad');
-            // }
+            const claveValida =  this.validarClave(clave);
+            if(!claveValida) {
+                throw new UnauthorizedException('La clave no cumple con los requisitos de seguridad');
+            }
 
             // actualizar la nueva clave el usuario
             const usuario = await this.usuariosService.buscarUsuarioxNombreUsuario(nombreUsuario);

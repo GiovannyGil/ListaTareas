@@ -36,7 +36,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider> 
       <SafeAreaView style={styles.container}>
         {/* Contenedor principal del formulario */}
         <View style={styles.loginContainer}>
