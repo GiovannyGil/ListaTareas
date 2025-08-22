@@ -6,7 +6,7 @@ import { tipoUsuario } from "../interfaces/TipoUsuario";
  * @param tipoUsuario : tipoUsuario -> datos del tipo de usuario a crear
  * @returns => Promise<tipoUsuario> -> retorna el tipo de usuario creado
  */
-export function crearTipoUsuario(tipoUsuario: tipoUsuario) {
+async function crearTipoUsuario(tipoUsuario: tipoUsuario) {
     try {
         return API.post('/tipos-usuario', tipoUsuario);
     } catch (error) {
@@ -22,7 +22,7 @@ export function crearTipoUsuario(tipoUsuario: tipoUsuario) {
  * Metodo para obtener todos los tipos de usuario
  * @returns => Promise<tipoUsuario[]> -> retorna la lista de tipos de usuario
  */
-export function obtenerTiposUsuario() {
+async function obtenerTiposUsuario() {
     try {
         return API.get('/tipos-usuario');
     } catch (error) {
@@ -39,7 +39,7 @@ export function obtenerTiposUsuario() {
  * @param id : number -> id del tipo de usuario
  * @returns => Promise<tipoUsuario> -> retorna el tipo de usuario encontrado
  */
-export function obtenerTipoUsuarioPorId(id: number) {
+async function obtenerTipoUsuarioPorId(id: number) {
     try {
         return API.get(`/tipos-usuario/${id}`);
     } catch (error) {
@@ -56,7 +56,7 @@ export function obtenerTipoUsuarioPorId(id: number) {
  * @param nombre : string -> nombre del tipo de usuario
  * @returns => Promise<tipoUsuario> -> retorna el tipo de usuario encontrado
  */
-export async function obtenerTipoUsuarioPorNombre(nombre: string) {
+async function obtenerTipoUsuarioPorNombre(nombre: string) {
     try {
         const response = await API.get(`/tipos-usuario/nombre/${nombre}`);
         return response.data;
@@ -75,7 +75,7 @@ export async function obtenerTipoUsuarioPorNombre(nombre: string) {
  * @param tipoUsuario : tipoUsuario -> datos del tipo de usuario a actualizar
  * @returns => Promise<tipoUsuario> -> retorna el tipo de usuario actualizado
  */
-export async function actualizarTipoUsuario(id: number, tipoUsuario: tipoUsuario) {
+async function actualizarTipoUsuario(id: number, tipoUsuario: tipoUsuario) {
     try {
         const response = await API.put(`/tipos-usuario/${id}`, tipoUsuario);
         return response.data;
@@ -93,7 +93,7 @@ export async function actualizarTipoUsuario(id: number, tipoUsuario: tipoUsuario
  * @param id : number -> id del tipo de usuario
  * @returns => Promise<void> -> retorna void
  */
-export async function eliminarTipoUsuarioDefinitivo(id: number) {
+async function eliminarTipoUsuarioDefinitivo(id: number) {
     try {
         const response = await API.delete(`/tipos-usuario/${id}`);
         return response.data;
@@ -111,7 +111,7 @@ export async function eliminarTipoUsuarioDefinitivo(id: number) {
  * @param id : number -> id del tipo de usuario
  * @returns => Promise<void> -> retorna void
  */
-export async function eliminarTipoUsuarioSoftDelete(id: number) {
+async function eliminarTipoUsuarioSoftDelete(id: number) {
     try {
         const response = await API.delete(`/tipos-usuario/soft/${id}`);
         return response.data;
@@ -123,3 +123,13 @@ export async function eliminarTipoUsuarioSoftDelete(id: number) {
         throw new Error("Error al eliminar el tipo de usuario");
     }
 }
+
+export default {
+    obtenerTiposUsuario,
+    obtenerTipoUsuarioPorId,
+    obtenerTipoUsuarioPorNombre,
+    crearTipoUsuario,
+    actualizarTipoUsuario,
+    eliminarTipoUsuarioDefinitivo,
+    eliminarTipoUsuarioSoftDelete
+};

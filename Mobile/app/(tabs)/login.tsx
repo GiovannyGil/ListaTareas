@@ -11,28 +11,50 @@ import {
   Alert 
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {login} from './Auth/Auth.services';
+import { Redirect } from 'expo-router';
+
 
 export default function HomeScreen() {  
   // Estados para manejar los valores de los campos del formulario
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [clave, setClave] = useState('');
-  // Añadir nuevos estados para el foco
   const [isNombreFocused, setIsNombreFocused] = useState(false);
   const [isClaveFocused, setIsClaveFocused] = useState(false);
-  // mensajes de error
   const [errorNombreUsuario, setErrorNombreUsuario] = useState('');
   const [errorClave, setErrorClave] = useState('');
 
-  // Función que se ejecuta al presionar el botón de login
-  const handleLogin = () => {
-    // Validación básica de campos vacíos
-    if (!nombreUsuario.trim() || !clave.trim()) {
-      Alert.alert('Error', 'Por favor completa todos los campos');
-      return;
+  // Validaciones y login
+  const handleLogin = async () => {
+    let valid = true;
+    // Validar nombreUsuario
+    if (!nombreUsuario) {
+      setErrorNombreUsuario('El nombre de usuario es obligatorio');
+      valid = false;
+    } else if (nombreUsuario.length > 20) {
+      setErrorNombreUsuario('Máximo 20 caracteres');
+      valid = false;
+    } else {
+      setErrorNombreUsuario('');
     }
-    
-    // Aquí iría la lógica de autenticación
-    Alert.alert('Login', `Usuario: ${nombreUsuario}`);
+    // Validar clave
+    if (!clave) {
+      setErrorClave('La contraseña es obligatoria');
+      valid = false;
+    } else if (clave.length > 20) {
+      setErrorClave('Máximo 20 caracteres');
+      valid = false;
+    } else {
+      setErrorClave('');
+    }
+    if (!valid) return;
+    try {
+      await login(nombreUsuario, clave);
+      // <Redirect to="/home" />
+      Alert.alert('Éxito', 'Inicio de sesión exitoso');
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'Error al iniciar sesión');
+    }
   };
 
   return (
@@ -52,39 +74,51 @@ export default function HomeScreen() {
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Nombre de Usuario</Text>
               <TextInput
-                 style={[
+                style={[
                   styles.textInput,
-                  isNombreFocused && styles.textInputFocused // aplicar estilo extra si está enfocado
+                  isNombreFocused && styles.textInputFocused
                 ]}
                 placeholder="Ingresa tu nombre de usuario"
-                placeholderTextColor="#87CEEB" // Sky Blue pastel para placeholder
+                placeholderTextColor="#87CEEB"
                 value={nombreUsuario}
-                onChangeText={setNombreUsuario}
+                onChangeText={text => {
+                  if (text.length <= 20) setNombreUsuario(text);
+                }}
                 onFocus={() => setIsNombreFocused(true)}
                 onBlur={() => setIsNombreFocused(false)}
                 autoCapitalize="none"
                 autoCorrect={false}
+                maxLength={20}
               />
+              {errorNombreUsuario ? (
+                <Text style={{ color: 'red', fontSize: 13, marginLeft: 12 }}>{errorNombreUsuario}</Text>
+              ) : null}
             </View>
 
             {/* Campo de contraseña */}
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Contraseña</Text>
               <TextInput
-              style={[
-                styles.textInput,
-                isClaveFocused && styles.textInputFocused
-              ]}
+                style={[
+                  styles.textInput,
+                  isClaveFocused && styles.textInputFocused
+                ]}
                 placeholder="Ingresa tu contraseña"
-                placeholderTextColor="#87CEEB" // Sky Blue pastel para placeholder
+                placeholderTextColor="#87CEEB"
                 value={clave}
-                onChangeText={setClave}
+                onChangeText={text => {
+                  if (text.length <= 20) setClave(text);
+                }}
                 onFocus={() => setIsClaveFocused(true)}
                 onBlur={() => setIsClaveFocused(false)}
                 secureTextEntry={true}
                 autoCapitalize="none"
                 autoCorrect={false}
+                maxLength={20}
               />
+              {errorClave ? (
+                <Text style={{ color: 'red', fontSize: 13, marginLeft: 12 }}>{errorClave}</Text>
+              ) : null}
             </View>
 
             {/* Botón de inicio de sesión */}

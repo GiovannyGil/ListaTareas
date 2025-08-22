@@ -5,7 +5,7 @@ import { Tarea } from "../interfaces/Tareas";
  * Metodo para obtener todas las tareas
  * @returns => Promise<Tarea[]> -> retorna la lista de tareas
  */
-export async function obtenerTareas() {
+async function obtenerTareas() {
   try {
     const response = await API.get("/tareas");
     return response.data;
@@ -23,7 +23,7 @@ export async function obtenerTareas() {
  * @param id : number -> id de la tarea
  * @returns => Promise<Tarea> -> retorna la tarea encontrada
  */
-export async function obtenerTareaPorID(id: number) {
+async function obtenerTareaPorID(id: number) {
   try {
     const response = await API.get(`/tarea/${id}`);
     return response.data;
@@ -41,7 +41,7 @@ export async function obtenerTareaPorID(id: number) {
  * @param tarea : Tarea -> datos de la tarea a crear
  * @returns => Promise<Tarea> -> retorna la tarea creada
  */
-export async function crearTarea(tarea: Tarea) {
+async function crearTarea(tarea: Tarea) {
     try {
         const response = await API.post("/tareas", tarea);
         return response.data;
@@ -59,7 +59,7 @@ export async function crearTarea(tarea: Tarea) {
  * @param id : { usuarioId: number } -> id del usuario
  * @returns => Promise<Tarea[]> -> retorna la lista de tareas del usuario
  */
-export async function buscarTareasPorUsuario(id: { usuarioId: number }) {
+async function buscarTareasPorUsuario(id: { usuarioId: number }) {
     try {
         const response = await API.get("/tareas", { params: { usuarioId: id.usuarioId } });
         return response.data;
@@ -78,7 +78,7 @@ export async function buscarTareasPorUsuario(id: { usuarioId: number }) {
  * @param tarea : Tarea -> datos de la tarea a actualizar
  * @returns => Promise<Tarea> -> retorna la tarea actualizada
  */
-export async function actualizarTarea(id: number, tarea: Tarea) {
+async function actualizarTarea(id: number, tarea: Tarea) {
     try {
         const response = await API.put(`/tareas/${id}`, tarea);
         return response.data;
@@ -96,7 +96,7 @@ export async function actualizarTarea(id: number, tarea: Tarea) {
  * @param id : number -> id de la tarea
  * @returns => Promise<void> -> retorna void
  */
-export async function eliminarTareaPermanente(id: number) {
+async function eliminarTareaPermanente(id: number) {
     try {
         const response = await API.delete(`/tareas/soft/${id}`);
         return response.data;
@@ -108,3 +108,12 @@ export async function eliminarTareaPermanente(id: number) {
         throw new Error("Error desconocido al eliminar la tarea");
     }
 }
+
+export default {
+    obtenerTareas,
+    obtenerTareaPorID,
+    crearTarea,
+    buscarTareasPorUsuario,
+    actualizarTarea,
+    eliminarTareaPermanente
+};

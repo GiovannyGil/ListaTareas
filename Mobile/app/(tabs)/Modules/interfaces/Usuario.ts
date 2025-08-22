@@ -1,5 +1,3 @@
-import { reestablecerClave } from "../../(tabs)/Auth/Auth.services"
-
 export interface Usuario {
   nombres: string
   apellidos: string

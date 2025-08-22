@@ -1,18 +1,16 @@
+// api.ts
 import axios from "axios";
 
-// Se crea una instancia de axios para hacer peticiones al backend
-// Se puede configurar la URL base y los headers que se van a usar en todas las peticiones
 const API = axios.create({
-  baseURL: "http://localhost:3000/api", // URL del backend
+  baseURL: "http://localhost:3000", // tu backend
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Si jay un token JWT guardado, se agrega automáticamente -> esto es útil para las peticiones que requieren autenticación
-// es decir, para las rutas protegidas -> pasa el token automaticamente en el header de la petición
+// Interceptor para agregar token
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token"); // o donde lo guardes
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

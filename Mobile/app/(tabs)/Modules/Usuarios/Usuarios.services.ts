@@ -5,7 +5,7 @@ import { Usuario } from "../interfaces/Usuario";
  * * Metodo para obtener todos los usuarios
  * @returns => Promise<Usuario[]> -> retorna la lista de usuarios
  */
-export async function obtenerUsuarios() {
+async function obtenerUsuarios() {
     try {
         const response = await API.get('/usuarios');
         return response.data;
@@ -23,7 +23,7 @@ export async function obtenerUsuarios() {
  * @param id : number -> id del usuario
  * @returns => Promise<Usuario> -> retorna el usuario encontrado
  */
-export async function obtenerUsuarioPorId(id: number) {
+async function obtenerUsuarioPorId(id: number) {
     try {
         const response = await API.get(`/usuario/${id}`);
         return response.data;
@@ -41,7 +41,7 @@ export async function obtenerUsuarioPorId(id: number) {
  * @param usuario : Usuario -> datos del usuario a crear
  * @returns => Promise<Usuario> -> retorna el usuario creado
  */
-export async function crearUsuario(usuario: Usuario) {
+async function crearUsuario(usuario: Usuario) {
     try {
         const response = await API.post('/usuarios', usuario);
         return response.data;
@@ -60,7 +60,7 @@ export async function crearUsuario(usuario: Usuario) {
  * @param usuario : Usuario -> datos del usuario a actualizar
  * @returns => Promise<Usuario> -> retorna el usuario actualizado
  */
-export async function actualizarUsuario(id: number, usuario: Usuario) {
+async function actualizarUsuario(id: number, usuario: Usuario) {
     try {
         const response = await API.put(`/usuarios/${id}`, usuario);
         return response.data;
@@ -78,7 +78,7 @@ export async function actualizarUsuario(id: number, usuario: Usuario) {
  * @param id : number -> id del usuario
  * @returns => Promise<void> -> retorna void
  */
-export async function eliminarUsuario(id: number) {
+async function eliminarUsuario(id: number) {
     try {
         return API.delete(`/usuarios/soft/${id}`);
     } catch (error) {
@@ -89,3 +89,12 @@ export async function eliminarUsuario(id: number) {
         throw new Error("Error al eliminar el usuario");
     }
 }
+
+
+export default {
+    obtenerUsuarios,
+    obtenerUsuarioPorId,
+    crearUsuario,
+    actualizarUsuario,
+    eliminarUsuario
+};

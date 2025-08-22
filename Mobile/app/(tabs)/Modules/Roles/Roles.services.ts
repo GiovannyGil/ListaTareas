@@ -6,7 +6,7 @@ import { Roles } from "../interfaces/Roles";
  * @param rol : Roles -> datos del rol a crear
  * @returns => Promise<Roles> -> retorna el rol creado
  */
-export async function crearRol(rol: Roles) {
+async function crearRol(rol: Roles) {
     try {
         const response = await API.post('/roles', rol);
         return response.data;
@@ -23,7 +23,7 @@ export async function crearRol(rol: Roles) {
  * Metodo para obtener todos los roles
  * @returns => Promise<Roles[]> -> retorna la lista de roles
  */
-export async function obtenerRoles() {
+async function obtenerRoles() {
     try {
         const response = await API.get('/roles');
         return response.data;
@@ -41,7 +41,7 @@ export async function obtenerRoles() {
  * @param id : number -> id del rol
  * @returns => Promise<Roles> -> retorna el rol encontrado
  */
-export async function obtenerRolPorId(id: number) {
+async function obtenerRolPorId(id: number) {
     try {
         const response = await API.get(`/roles/${id}`);
         return response.data;
@@ -59,7 +59,7 @@ export async function obtenerRolPorId(id: number) {
  * @param nombre : string -> nombre del rol
  * @returns => Promise<Roles> -> retorna el rol encontrado
  */
-export async function obtenerRolporNombre(nombre: string) {
+async function obtenerRolporNombre(nombre: string) {
     try {
         const response = await API.get(`/roles/nombre/${nombre}`);
         return response.data;
@@ -77,7 +77,7 @@ export async function obtenerRolporNombre(nombre: string) {
  * @param id : number -> id del rol
  * @returns => Promise<void> -> retorna void
  */
-export async function eliminarRol(id: number) {
+async function eliminarRol(id: number) {
     try {
         const response = await API.delete(`/roles/${id}`);
         return response.data;
@@ -89,3 +89,11 @@ export async function eliminarRol(id: number) {
         throw new Error("Error al eliminar el rol");
     }
 }
+
+export default {
+    crearRol,
+    obtenerRoles,
+    obtenerRolPorId,
+    obtenerRolporNombre,
+    eliminarRol
+};

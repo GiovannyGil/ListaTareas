@@ -1,5 +1,5 @@
 import API from "@/services/API.services";
-import { Usuario, reestablecerClave } from "../../Modules/interfaces/Usuario";
+import { Usuario, reestablecerClave } from "../Modules/interfaces/Usuario";
 
 /**
  * Metodo para iniciar sesión
@@ -13,6 +13,10 @@ export async function login(nombreUsuario: string, clave: string) {
       nombreUsuario,
       clave,
     });
+    
+    if (response.data?.token) {
+      localStorage.setItem("token", response.data.token);
+    }
     return response.data;
   } catch (error) {
     if (typeof error === "object" && error !== null && "response" in error) {
@@ -65,7 +69,7 @@ export async function recordarUsuario(correo: string) {
  * @param reestablecerClave : reestablecerClave -> datos para reestablecer la clave
  * @returns => Promise<void> -> retorna void
  */
-export async function reestablecerClave(reestablecerClave: reestablecerClave) {
+export async function ReestablecerClave(reestablecerClave: reestablecerClave) {
   try {
     const response = await API.post("/auth/reestablecerClave", reestablecerClave);
     return response.data;
