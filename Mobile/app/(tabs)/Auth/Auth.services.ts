@@ -1,5 +1,5 @@
 import API from "@/services/API.services";
-import { Usuario, reestablecerClave } from "../Modules/interfaces/Usuario";
+import { Usuario, reestablecerClave } from "../../Modules/interfaces/Usuario";
 
 /**
  * Metodo para iniciar sesión
