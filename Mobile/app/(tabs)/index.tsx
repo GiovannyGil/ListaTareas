@@ -15,6 +15,7 @@ import {login} from './Auth/Auth.services';
 import { Redirect } from 'expo-router';
 import { useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
+import { HeaderTitle } from '@react-navigation/elements';
 
 export default function LoginScreen() {  
   // Estados para manejar los valores de los campos del formulario
@@ -53,7 +54,11 @@ export default function LoginScreen() {
     if (!valid) return;
     try {
       await login(nombreUsuario, clave);
-      router.replace('/Modules/Home/Home');
+
+      router.replace({
+        pathname: '/Modules/Home/Home',
+        params: {}
+      });
     } catch (error: any) {
       Alert.alert('Error', error.message || 'Error al iniciar sesión');
     }
@@ -228,9 +233,9 @@ const styles = StyleSheet.create({
 
   // Efecto de focus mejorado con colores pastel
   textInputFocused: {
-    borderColor: '#93eb87ff', // Sky Blue - azul cielo pastel vibrante
+    borderColor: '#B0E0E6', // Sky Blue - azul cielo pastel vibrante
     backgroundColor: '#F0FFFF', // Azure - fondo azul hielo
-    shadowColor: '#eb87d2ff',
+    shadowColor: '#87CEEB',
     shadowOffset: {
       width: 0,
       height: 3,

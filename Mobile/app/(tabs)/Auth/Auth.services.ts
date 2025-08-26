@@ -1,5 +1,6 @@
 import API from "@/services/API.services";
 import { Usuario, reestablecerClave } from "../../Modules/interfaces/Usuario";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Metodo para iniciar sesión
@@ -15,7 +16,7 @@ export async function login(nombreUsuario: string, clave: string) {
     });
     
     if (response.data?.token) {
-      localStorage.setItem("token", response.data.token);
+      await AsyncStorage.setItem("token", response.data.token);
     }
     return response.data;
   } catch (error) {
@@ -26,6 +27,29 @@ export async function login(nombreUsuario: string, clave: string) {
     throw new Error("Error en el login");
   }
 };
+
+/**
+ * Obtener el token guardado
+ */
+export async function getToken(): Promise<string | null> {
+  try {
+    return await AsyncStorage.getItem("token");
+  } catch (error) {
+    console.error("Error getting token:", error);
+    return null;
+  }
+}
+
+/**
+ * Eliminar el token (logout)
+ */
+export async function logout(): Promise<void> {
+  try {
+    await AsyncStorage.removeItem("token");
+  } catch (error) {
+    console.error("Error removing token:", error);
+  }
+}
 
 /**
  * Metodo para registrar un nuevo usuario
