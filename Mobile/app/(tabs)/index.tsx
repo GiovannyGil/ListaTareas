@@ -56,7 +56,7 @@ export default function LoginScreen() {
       await login(nombreUsuario, clave);
 
       router.replace({
-        pathname: '/Modules/Home/Home',
+        pathname: '/Home/Home',
         params: {}
       });
     } catch (error: any) {

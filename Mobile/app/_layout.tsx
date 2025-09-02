@@ -1,38 +1,59 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Drawer } from "expo-router/drawer";
+import { StatusBar } from "expo-status-bar";
+import "react-native-reanimated";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  if (!loaded) return null;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <Drawer
         screenOptions={{
-          headerShown: false,
+          headerStyle: { backgroundColor: "#4682B4" },
+          headerTintColor: "#fff",
+          drawerActiveTintColor: "#4682B4",
+          drawerLabelStyle: { fontSize: 16 },
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen name="home/home" />
-        <Stack.Screen name="roles/roles" />
-        <Stack.Screen name="tareas/tareas" />
-        <Stack.Screen name="usuarios/usuarios" />
-        <Stack.Screen name="tipousuario/tipousuario" />
+        <Drawer.Screen
+          name="/home/home"
+          options={{ drawerLabel: "Inicio", headerTitle: "Inicio" }}
+        />
+        <Drawer.Screen
+          name="/roles/roles"
+          options={{ drawerLabel: "Roles", headerTitle: "Roles" }}
+        />
+        <Drawer.Screen
+          name="/tareas/tareas"
+          options={{ drawerLabel: "Tareas", headerTitle: "Tareas" }}
+        />
+        <Drawer.Screen
+          name="/usuarios/usuarios"
+          options={{ drawerLabel: "Usuarios", headerTitle: "Usuarios" }}
+        />
+        <Drawer.Screen
+          name="/tipousuario/tipousuario"
+          options={{ drawerLabel: "Tipo Usuario", headerTitle: "Tipo Usuario" }}
+        />
 
-      </Stack>
+        {/* Oculto en el Drawer */}
+        <Drawer.Screen
+          name="(tabs)"
+          options={{ drawerItemStyle: { display: "none" }, headerShown: false }}
+        />
+
+        <Drawer.Screen name="+not-found" options={{ headerTitle: "Not Found" }} />
+      </Drawer>
+
       <StatusBar style="auto" />
     </ThemeProvider>
   );
