@@ -22,7 +22,7 @@ export class AuthService {
     ) { }
 
     // método para iniciar sesión
-    async login(nombreUsuario: string, clave: string): Promise<{ token: string }> {
+    async login(nombreUsuario: string, clave: string): Promise<{ token: string; usuario: Usuario }> {
         try {
             // Buscar usuario
             const usuario = await this.usuariosService.buscarUsuarioxNombreUsuario(nombreUsuario);
@@ -54,7 +54,10 @@ export class AuthService {
                 expiresIn: '1h'
             });
 
-            return { token: token };
+            return { 
+                token: token,
+                usuario: usuario
+            };
         } catch (error) {
             console.error('Error en login:', error.message);
             throw new UnauthorizedException('Credenciales inválidas', error.message);

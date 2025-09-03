@@ -14,9 +14,10 @@ export async function login(nombreUsuario: string, clave: string) {
       nombreUsuario,
       clave,
     });
-    
+
     if (response.data?.token) {
       await AsyncStorage.setItem("token", response.data.token);
+      await AsyncStorage.setItem("usuario", JSON.stringify(response.data.usuario));
     }
     return response.data;
   } catch (error) {
