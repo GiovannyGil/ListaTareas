@@ -24,9 +24,6 @@ export default function HomeScreen() {
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F8FDFF' }}>
           <View style={{ height: '50%', justifyContent: 'center', alignItems: 'center' }}>
-            <div className="card">
-              <h2>Bienvenido a la pantalla principal!</h2>
-            </div>
           </View>
         </SafeAreaView>
       </SafeAreaProvider>
