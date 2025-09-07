@@ -19,23 +19,6 @@ export default function RootLayout() {
   const router = useRouter();
   const [rol, setRol] = useState<{ rolId?: string } | null>(null);
 
-  useEffect(() => {
-    AsyncStorage.getItem("usuario").then((usuarioStr) => {
-      if (usuarioStr) {
-        try {
-          const usuarioObj = JSON.parse(usuarioStr);
-          setRol(usuarioObj);
-          console.log('usuario', usuarioObj.rolId);
-        } catch (e) {
-          console.log('Error parsing usuario:', e);
-        }
-      } else {
-        setRol(null);
-        console.log('usuario', null);
-      }
-    });
-  }, []);
-
   const handleLogout = async () => {
     await logout();
     await AsyncStorage.removeItem("usuario");
