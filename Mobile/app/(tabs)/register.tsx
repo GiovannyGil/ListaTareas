@@ -21,9 +21,6 @@ export default function TabTwoScreen() {
       Alert.alert('Error', 'Por favor completa todos los campos');
       return;
     }
-
-    // Aquí iría la lógica de autenticación
-    Alert.alert('Login', `Usuario: ${nombreUsuario}`);
   };
   return (
     <SafeAreaProvider>
@@ -207,9 +204,9 @@ const styles = StyleSheet.create({
   // Contenedor del formulario de login
   loginContainer: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 25, // Bordes más redondeados para look moderno
+    borderRadius: 25, 
     padding: 30,
-    shadowColor: '#086c94ff', // Sombra en azul pastel
+    shadowColor: '#086c94ff',
     shadowOffset: {
       width: 0,
       height: 6,
@@ -219,14 +216,14 @@ const styles = StyleSheet.create({
     elevation: 10, // Para Android
     marginHorizontal: 20,
     borderWidth: 1,
-    borderColor: '#E6F3FF', // Borde sutil azul muy claro
+    borderColor: '#E6F3FF', 
   },
 
   // Título principal
   title: {
     fontSize: 34,
     fontWeight: 'bold',
-    color: '#4682B4', // Steel Blue - azul pastel vibrante
+    color: '#4682B4', 
     textAlign: 'center',
     marginBottom: 0,
     letterSpacing: 0.1,
@@ -235,7 +232,7 @@ const styles = StyleSheet.create({
   // Subtítulo
   subtitle: {
     fontSize: 14,
-    color: '#708090', // Slate Gray - gris azulado pastel
+    color: '#708090', 
     textAlign: 'center',
     marginTop: -9,
     marginBottom: 26,
@@ -256,7 +253,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#5F9EA0', // Cadet Blue - azul verdoso pastel
+    color: '#5F9EA0',
     marginBottom: 1,
     paddingStart: 12,
     letterSpacing: 0.1,
@@ -266,19 +263,19 @@ const styles = StyleSheet.create({
   textInput: {
     height: 40,
     borderWidth: 3,
-    borderColor: '#B0E0E6', // Powder Blue - azul polvo pastel
-    borderRadius: 25, // Bordes más redondeados
+    borderColor: '#B0E0E6', 
+    borderRadius: 25, 
     paddingHorizontal: 20,
     fontSize: 16,
-    backgroundColor: '#F8FDFF', // Fondo azul muy muy claro
-    color: '#054b4bff', // Dark Slate Gray - texto en gris oscuro suave
+    backgroundColor: '#F8FDFF',
+    color: '#054b4bff', 
     fontWeight: '400',
   },
 
   // Efecto de focus mejorado con colores pastel
   textInputFocused: {
-    borderColor: '#87CEEB', // Sky Blue - azul cielo pastel vibrante
-    backgroundColor: '#F0FFFF', // Azure - fondo azul hielo
+    borderColor: '#87CEEB', 
+    backgroundColor: '#F0FFFF', 
     shadowColor: '#87CEEB',
     shadowOffset: {
       width: 0,
@@ -287,12 +284,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 4,
-    transform: [{ scale: 1.01 }], // Efecto sutil de agrandamiento
+    transform: [{ scale: 1.01 }], 
   },
 
   // Botón principal con gradiente pastel simulado
   loginButton: {
-    backgroundColor: '#87CEEB', // Sky Blue - azul cielo pastel
+    backgroundColor: '#87CEEB', 
     borderRadius: 16,
     width: '60%',
     height: 45,
@@ -309,7 +306,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 6,
     borderWidth: 1,
-    borderColor: '#B0C4DE', // Light Steel Blue - borde sutil
+    borderColor: '#B0C4DE', 
   },
 
   // Texto del botón con mejor contraste
@@ -331,7 +328,7 @@ const styles = StyleSheet.create({
 
   // Enlaces con color pastel vibrante
   linkText: {
-    color: '#2d2d2eff', // Slate Blue - púrpura pastel que complementa
+    color: '#2d2d2eff', 
     fontSize: 15,
     fontWeight: '700',
     textDecorationLine: 'none',
